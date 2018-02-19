@@ -1,0 +1,60 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+	margin: 0;
+}
+.image1{
+	background:url(../img/image1.jpg) no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;
+	height: 100vh;
+}
+header
+{
+	background: black;
+	color: white;
+	padding :8px 0px 6px 40px;
+	height: 45px;
+}
+header h1
+{
+	display: inline;
+	font-weight: 400;
+	font-size: 32px;
+	float:left;
+	margin-top: 2px;
+	margin-right: 10px;
+}
+nav ul
+{
+	display:inline;
+	padding: 0px;
+	float:left;
+}
+nav ul li
+{
+	display:inline-block;
+	list-style-type: none;
+	color: white;
+	float:left;
+	margin-left: 12px;
+}
+nav ul li a
+{
+	color: white;
+	text-decoration: none;
+}
+.homered
+{
+	background-color: red;
+	padding: 30px 10px 16px 10px;
+}
+.divider
+{
+	background-color: red;
+	height: 5px;
+}
+.homeblack:hover
+{
+	background-color: blue;
+	padding: 30px 10px 16px 10px;
+}
