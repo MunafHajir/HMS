@@ -3,10 +3,14 @@ body{
 	margin: 0;
 }
 .image1{
-	background:url(../img/image1.jpg) no-repeat;
-	-webkit-background-size: cover;
+	background-image:url(../img/image1.jpg) no-repeat;
+	/* -webkit-background-size: cover; */
 	background-size: cover;
-	height: 100vh;
+	/* height: 100vh; */
+}
+
+.buttonReg{
+	position : absolute; top:80%; float:right;
 }
 header
 {
