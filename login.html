@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>login and register form design</title>
+	<title>Sign Up/Sign In</title>
 	<link rel="stylesheet" href="css/log.css">
 </head>
 <body>
 	<div class="login-page">
 		<div class="form" >
-				<form class="register-form" method="POST">
-				<input type="text" placeholder="User Name" required/>
-				<input type="email" placeholder="Email Id" required/>
- 				<input type="password" placeholder="Password" required/>
- 				<input type="password" placeholder="Confirm Password" required/>
-				<input type="text" placeholder="Contact No." required/>
+				<form class="register-form" method="POST" action="registerProcess.php" name="myForm" onsubmit="pass();">
+				<input type="text" placeholder="User Name" name="uname" required pattern="[A-Za-z ]+"/>
+				<input type="email" placeholder="Email Id" name="email" required />
+ 				<input type="password" placeholder="Password" name="password" required/>
+ 				<input type="password" placeholder="Confirm Password" name="con_password" required/>
+				<input type="text" placeholder="Contact No." name="cno" required pattern="[0-9]+" maxlength="10" minlength="10" />
   				<button> <b>Create</b></button>
-				<p class="message">Already registered ?  <a href="#">login</a></p>
+				<p class="message">Already registered ?  <a href="login.html">login</a></p>
 				</form>
-			<form class="login-form">
-				<input type="text" placeholder="User Name" required/>
-				<input type="password" placeholder="Password" required/>
+			<form class="login-form" method="POST" action="loginProcess.php">
+				<input type="text" placeholder="User Name" name="uname" required pattern="[A-Za-z ]+"/>
+				<input type="password" placeholder="Password" name="pass" required/>
 				<button> <b>login</b></button>
 				<p class="message">Not Registered ?  <a href="#">Register</a></p>
 			</form>
 			</div>
 	</div>
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-<script >
+<script>
 	 $('.message a').click(function(){
      $('form').animate({height:"toggle" , opacity:"toggle"}, "slow");
     });
+</script>
+<script>
+function pass() {
+    var password= document.forms["myForm"].password.value.length;
+    var con_password = document.forms["myForm"].con_password.value.length;
+    if (password != con_password) {
+        alert("Password and Confirm Password don't match");
+        return window.location="register.php";
+    }
+    return true;
+}
 </script>
 </body>
 </html>
