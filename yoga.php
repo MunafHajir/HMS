@@ -1,3 +1,22 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+require_once('server.php');
+if($_POST){
+    $type = "yoga";
+    $date=$_POST['appoint_date'];
+    $time=$_POST['appoint_time'];
+    $ppl=$_POST['attend'];
+    $name = $_POST['name'];
+    $query="insert into appointment(username,appointment_date,appointment_of,appiontment_time,appoint_for) 
+                    values('$name','$date','$ppl','$time','$type')";
+    mysqli_query($con,$query);
+    echo mysqli_error($con);
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,15 +58,15 @@
                         <li class="label">Main</li>
                         <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> Dashboard  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
-                                <li><a href="hospital.html">Hospital</a></li>
-                                <li><a href="gym.html">Gym</a></li>
+                                <li><a href="hospital.php">Hospital</a></li>
+                                <li><a href="gym.php">Gym</a></li>
                                 
                                 
                                 
                             </ul>
                         </li>
 
-                        <li><a><i class="ti-close"></i> Logout</a></li>
+                        <li><a  href="login.html"><i class="ti-close"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -91,7 +110,7 @@
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                                     <li class="breadcrumb-item active">YOGA</li>
                                 </ol>
                             </div>
@@ -111,15 +130,17 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="basic-form">
-                                                <form>
+                                                <form action="yoga.php" method="post">
                                                         <div class="form-group">
-                                                                <label>Trainer</label>
-                                                                <select class="form-control">
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                    <option>4</option>
-                                                                    <option>5</option>
+                                                            <label>Name</label>
+                                                            <input type="text" name="name" class="form-control">
+                                                                <label>Trainees</label>
+                                                                <select class="form-control" name="attend">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
                                                                 </select>
                                                             
                                                                 <br>
@@ -148,36 +169,32 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Trainer</th>
-                                                    
+                                                    <th>Name</th>
+                                                    <th>Trainees</th>
                                                     <th>Appointment Date</th>
                                                     <th>Appointment Time</th>
                                                  
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Kolor Tea Shirt For Man</td>
-                                                    
-                                                    <td>January 22</td>
-                                                    <td>10:50</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Kolor Tea Shirt For Women</td>
-                                                    <td>January 30</td>
-                                                    <td>10:50</td>                                                    
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Blue Backpack For Baby</td>
-                                                    <td>January 25</td>
-                                                    <td>10:50</td>
-                                                </tr>
-                                            </tbody>
+                                            <?php
+
+                                            $query = "select * from appointment where appoint_for='yoga'";
+                                            $res = mysqli_query($con, $query);
+                                            echo mysqli_error($con);
+
+
+                                            if (mysqli_num_rows($res) > 0) {
+                                                while ($row = mysqli_fetch_array($res)) {
+                                                    echo '<tr>
+                                                        <td>' . $row['username'] . '</td>
+                                                        <td>' . $row['appointment_of'] . '</td>
+                                                        <td>' . $row['appointment_date'] . '</td>
+                                                        <td>' . $row['appiontment_time'] . '</td>
+                                                </tr>';
+                                                }
+
+                                            }
+                                            ?>
                                         </table>
                                     </div>
                                 </div>

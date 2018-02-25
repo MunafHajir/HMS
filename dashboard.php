@@ -1,3 +1,14 @@
+<?php
+        session_start();
+		error_reporting(E_ALL);
+		ini_set("display_errors", 1);
+		require_once('server.php');
+        $name= $_SESSION['name'];
+
+		?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,16 +50,16 @@
                 <div class="nano-content">
                     <ul>
                         <div class="logo"><a href="index.html"><!-- <img src="assets/images/logo.png" alt="" /> --><span>Welcome</span></a></div>
-                        <li class="label">Main</li>
+                        <li class="label"><?php echo $name ?></li>
                         <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> Dashboard <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
-                                <li><a href="hospital.html">Hospital</a></li>
+                                <li><a href="hospital.php">Hospital</a></li>
                                 <li><a href="#">Yoga</a></li>
                                 <li><a href="#">Gym</a></li>
                             </ul>
                         </li>
 
-<li><a><i class="ti-close"></i> Logout</a></li>
+<li><a  href="login.html"><i class="ti-close"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -75,7 +86,7 @@
                                         <div class="stat-icon dib"><i class="ti-plus color-success" ></i></div>
                                         <div class="stat-content dib" style="text-align:center;">
                                             <h3>
-                                                <a href="hospital.html"><div class="text-success">Hospital</div></a></h3>
+                                                <a href="hospital.php"><div class="text-success">Hospital</div></a></h3>
                                             
                                         </div>
                                     </div>
@@ -87,7 +98,7 @@
                                         <div class="stat-icon dib"><i class="ti-user color-primary border-primary"></i></div>
                                         <div class="stat-content dib">
                                                 <h3>
-                                                        <a href="#"><div class="text-primary">Yoga</div></a></h3>
+                                                        <a href="yoga.php"><div class="text-primary">Yoga</div></a></h3>
                                                     
                                         </div>
                                     </div>
@@ -99,7 +110,7 @@
                                         <div class="stat-icon dib"><i class="ti-layout-grid2 color-danger border-danger"></i></div>
                                         <div class="stat-content dib">
                                                 <h3>
-                                                        <a href="#"><div class="text-danger">Gym</div></a></h3>
+                                                        <a href="gym.php"><div class="text-danger">Gym</div></a></h3>
                                         </div>
                                     </div>
                                 </div>
