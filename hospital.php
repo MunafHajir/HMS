@@ -149,11 +149,15 @@
                                                         <div class="form-group">
                                                                 <label>Appointment Of</label>
                                                                 <select class="form-control" name="apl">
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
+                                                                    <?php 
+                $querydoctor = "select name from validation where type='Hospital'";
+                                        $result = mysqli_query($con,$querydoctor);
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                            echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                        }
+                                                                    
+                                                                    ?>
                                                                 </select>
                                                             
                                                                 <br>

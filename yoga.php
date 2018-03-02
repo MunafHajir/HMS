@@ -231,7 +231,7 @@ if($_POST){
                                                         <input type="time" class="form-control" name="appoint_time_end">
                                                         
                                                         <label>Package:</label>
-                                                        <select name="package">
+                                                        <select name="package" class="form-control">
                                                             <option value="Package 1">Package 1</option>
                                                             <option value="Package 2">Package 2</option>
                                                             <option value="Package 3">Package 3</option>
