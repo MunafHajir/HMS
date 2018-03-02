@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2018 at 10:07 AM
+-- Generation Time: Mar 02, 2018 at 12:13 PM
 -- Server version: 5.6.17-log
 -- PHP Version: 5.5.12
 
@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `gym` (
   `time_from` timestamp NULL DEFAULT NULL,
   `time_end` timestamp NULL DEFAULT NULL,
   `trainer` varchar(255) NOT NULL,
+  `package` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email_id` varchar(255) NOT NULL,
-  `contact_no` int(10) NOT NULL,
+  `contact_no` bigint(12) NOT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`username`),
   UNIQUE KEY `email_id` (`email_id`,`contact_no`)
@@ -105,7 +106,26 @@ CREATE TABLE IF NOT EXISTS `validation` (
 --
 
 INSERT INTO `validation` (`name`, `type`) VALUES
-('Suraj', 'Hospital');
+('Suraj', 'Hospital'),
+('Munaf', 'Gym'),
+('Moin', 'Yoga');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yoga`
+--
+
+CREATE TABLE IF NOT EXISTS `yoga` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `appointment_date` varchar(255) NOT NULL,
+  `time_from` timestamp NOT NULL,
+  `time_end` timestamp NOT NULL,
+  `trainer` varchar(255) NOT NULL,
+  `package` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
