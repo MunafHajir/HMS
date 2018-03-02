@@ -11,5 +11,6 @@
 			'$email','$cno')";
 			mysqli_query($con,$query);
 			echo mysqli_error($con);
+			header("Location:login.html");		
 		}
 ?>

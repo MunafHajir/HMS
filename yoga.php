@@ -18,7 +18,7 @@ if($_POST){
     $query="insert into yoga(username,appointment_date,trainer,time_from,time_end,package) 
                     values('$username','$date','$trainer','$timefrom','$timeend','$package')";
 
-    echo $query;
+    //echo $query;
     mysqli_query($con,$query);
     echo mysqli_error($con);
 
