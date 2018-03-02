@@ -42,7 +42,8 @@ if($_POST){
                         <img src="../HMS/atlas/img/logo.png" alt="logo">
                     </div>
                     <div class="col-6 align-self-center text-right">
-                        <a href="login.html" class="text-white lead">Register</a>
+                        <a href="login.html" class="text-white lead">Register</a><br>
+                        <a href="feedback.php" class="text-white lead">Give Us Feedback</a>
                     </div>
                 </div>
             </header>
