@@ -3,14 +3,22 @@ session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 require_once('server.php');
+$username = $_SESSION['name'];
 if($_POST){
     $type = "yoga";
     $date=$_POST['appoint_date'];
-    $time=$_POST['appoint_time'];
-    $ppl=$_POST['attend'];
-    $name = $_POST['name'];
-    $query="insert into appointment(username,appointment_date,appointment_of,appiontment_time,appoint_for) 
-                    values('$name','$date','$ppl','$time','$type')";
+    $trainer = $_POST['trainer'];
+    $package = $_POST['package'];
+    $timefrom = $_POST['appoint_time_from'];
+    $timeend = $_POST['appoint_time_end'];
+    $package = $_POST['package'];
+    
+    
+
+    $query="insert into yoga(username,appointment_date,trainer,time_from,time_end,package) 
+                    values('$username','$date','$trainer','$timefrom','$timeend','$package')";
+
+    echo $query;
     mysqli_query($con,$query);
     echo mysqli_error($con);
 
@@ -46,6 +54,8 @@ if($_POST){
     <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/lib/helper.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -101,7 +111,7 @@ if($_POST){
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span>Welcome Here</span></h1>
+                                <h1>Hello, <span>Welcome <?= $username?></span></h1>
                             </div>
                         </div>
                     </div>
@@ -118,14 +128,75 @@ if($_POST){
                     </div>
                     <!-- /# column -->
                 </div>
+
+                <!-- <div class="col-lg-12">
+                    <h2 class =".weather-one">YOGA</h2>
+                    <img src="../HMS/img/yoga.jpg" alt="">
+
+                </div> -->
                 <!-- /# row -->
                 <section id="main-content">
                     <div class="row">
-                           
+                            
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="stat-widget-two">
+                                        <div class="stat-content">
+                                            <div class="stat-text">Package 1 </div>
+                                            <div class="stat-digit"> <i class="fa fa-usd"></i>400</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="stat-widget-two">
+                                        <div class="stat-content">
+                                            <div class="stat-text">Package 2</div>
+                                            <div class="stat-digit"> <i class="fa fa-usd"></i>350</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="stat-widget-two">
+                                        <div class="stat-content">
+                                            <div class="stat-text">Package 3</div>
+                                            <div class="stat-digit"> <i class="fa fa-usd"></i>200</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="stat-widget-two">
+                                        <div class="stat-content">
+                                            <div class="stat-text">Package 4</div>
+                                            <div class="stat-digit"> <i class="fa fa-usd"></i>300</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /# card -->
+                            </div>
+                            <!-- /# column -->
+                        </div>
                             <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-title">
-                                            <h4>Book Appointment</h4>
+                                            <h4>Book Package</h4>
                                             
                                         </div>
                                         <div class="card-body">
@@ -133,22 +204,40 @@ if($_POST){
                                                 <form action="yoga.php" method="post">
                                                         <div class="form-group">
                                                             <label>Name</label>
-                                                            <input type="text" name="name" class="form-control">
-                                                                <label>Trainees</label>
-                                                                <select class="form-control" name="attend">
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
+                                                            <input type="text" name="name" value=<?=$username?> class="form-control" disabled>
+                                                                <label>Trainer: </label>
+                                                                <select type= "trainer" class="form-control" name="trainer">
+                                                                    <?php 
+                                                                    $querytrainer = 'select name from validation where type="Yoga"';
+                                                                    $result = mysqli_query($con,$querytrainer);
+                                                                    var_dump($result);
+                                                                    while($row = mysqli_fetch_array($result))
+                                                                    {
+                                                                    echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                                                    }
+                                                                    
+                                                                    ?>
+                                                                   
                                                                 </select>
                                                             
                                                                 <br>
                                                         <label>Appointment Date:</label>
                                                         <input type="date" class="form-control" name="appoint_date">
 
-                                                        <label>Appointment Time</label>
-                                                        <input type="time" class="form-control" name="appoint_time">
+                                                        <label>From:</label>
+                                                        <input type="time" class="form-control" name="appoint_time_from">
+
+                                                        <label>End:</label>
+                                                        <input type="time" class="form-control" name="appoint_time_end">
+                                                        
+                                                        <label>Package:</label>
+                                                        <select name="package">
+                                                            <option value="Package 1">Package 1</option>
+                                                            <option value="Package 2">Package 2</option>
+                                                            <option value="Package 3">Package 3</option>
+                                                        </select>
+
+
                                                     </div>
                                                     <button type="submit" class="btn btn-primary" value="submit">Submit</button>
                                                 </form>
@@ -169,16 +258,16 @@ if($_POST){
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Trainees</th>
+                                                    <th>Trainer</th>
                                                     <th>Appointment Date</th>
-                                                    <th>Appointment Time</th>
-                                                 
+                                                    <th>From</th>
+                                                    <th>End</th>
+                                                    <th>Package 1</th>               
                                                 </tr>
                                             </thead>
                                             <?php
 
-                                            $query = "select * from appointment where appoint_for='yoga'";
+                                            $query = "select * from yoga where username = '$username'";
                                             $res = mysqli_query($con, $query);
                                             echo mysqli_error($con);
 
@@ -186,10 +275,11 @@ if($_POST){
                                             if (mysqli_num_rows($res) > 0) {
                                                 while ($row = mysqli_fetch_array($res)) {
                                                     echo '<tr>
-                                                        <td>' . $row['username'] . '</td>
-                                                        <td>' . $row['appointment_of'] . '</td>
+                                                        <td>' . $row['trainer'] . '</td>
                                                         <td>' . $row['appointment_date'] . '</td>
-                                                        <td>' . $row['appiontment_time'] . '</td>
+                                                        <td>' . $row['time_from'] . '</td>
+                                                        <td>' . $row['time_end'] . '</td>
+                                                        <td>' . $row['package'] . '</td>
                                                 </tr>';
                                                 }
 
