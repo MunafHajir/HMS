@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2018 at 05:00 PM
+-- Generation Time: Mar 02, 2018 at 06:37 PM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.27-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -44,7 +44,8 @@ INSERT INTO `appointment` (`id`, `username`, `patient_name`, `appointment_date`,
 (1, 'testm', 'Munaf', '2018-12-04', '2', '02:00', 'hospital'),
 (2, 'testm', 'Munaf Hajir', '2018-01-30', '1', '01:01', 'hospital'),
 (4, 'testm', 'new', '2018-01-01', '2', '01:00', 'hospital'),
-(5, 'testm', 'test', '2018-01-01', '3', '01:00', 'hospital');
+(5, 'testm', 'test', '2018-01-01', '3', '01:00', 'hospital'),
+(6, 'Moin', 'Test', '2018-04-04', '2', '11:01', 'hospital');
 
 -- --------------------------------------------------------
 
@@ -57,6 +58,35 @@ CREATE TABLE `contact` (
   `email` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`name`, `email`, `message`) VALUES
+('Contact', 'contact@contact.com', 'This is just 1st attempt to test contact ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` bigint(12) NOT NULL,
+  `service` varchar(255) NOT NULL,
+  `rate` bigint(12) NOT NULL,
+  `message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`name`, `email`, `phone`, `service`, `rate`, `message`) VALUES
+('Moin Gadkari', 'gadmoin@gmail.com', 7738545542, 'yoga', 9, 'Test');
 
 -- --------------------------------------------------------
 
@@ -94,7 +124,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `email_id`, `contact_no`) VALUES
 (1, 'testm', 'e10adc3949ba59abbe56e057f20f883e', 'munafhajirpro@gmail.com', 2147483647),
 (2, 'testmu', 'e10adc3949ba59abbe56e057f20f883e', 'test@gmail.com', 2147483647),
-(4, 'testu', 'e10adc3949ba59abbe56e057f20f883e', 'mafon@hiaf', 1234567890);
+(4, 'testu', 'e10adc3949ba59abbe56e057f20f883e', 'mafon@hiaf', 1234567890),
+(5, 'Moin ', '06a998cdd13c50b7875775d4e7e9fa74', 'gadmoin@gmail.com', 7738545542);
 
 -- --------------------------------------------------------
 
@@ -127,8 +158,8 @@ CREATE TABLE `yoga` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `appointment_date` varchar(255) NOT NULL,
-  `time_from` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `time_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `time_from` varchar(255) NOT NULL,
+  `time_end` varchar(255) NOT NULL,
   `trainer` varchar(255) NOT NULL,
   `package` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -147,6 +178,12 @@ ALTER TABLE `appointment`
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
   ADD PRIMARY KEY (`name`);
 
 --
@@ -176,7 +213,7 @@ ALTER TABLE `yoga`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `gym`
 --
@@ -186,7 +223,7 @@ ALTER TABLE `gym`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `yoga`
 --
