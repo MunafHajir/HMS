@@ -235,6 +235,7 @@ if($_POST){
                                                             <option value="Package 1">Package 1</option>
                                                             <option value="Package 2">Package 2</option>
                                                             <option value="Package 3">Package 3</option>
+                                                            <option value="Package 3">Package 4</option>
                                                         </select>
 
 
