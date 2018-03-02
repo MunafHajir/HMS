@@ -3,15 +3,19 @@
                 error_reporting(E_ALL);
                 ini_set("display_errors", 1);
                 require_once('server.php');
+                $username = $_SESSION['name'];
                 if($_POST){
                     $type = "hospital";
                     $date=$_POST['appoint_date'];
                     $time=$_POST['appoint_time'];
                     $ppl=$_POST['apl'];
                     $name = $_POST['pname'];
-                    $query="insert into appointment(username,appointment_date,appointment_of,appiontment_time,appoint_for) 
-                    values('$name','$date','$ppl','$time','$type')";
+                    $query="insert into appointment(username,patient_name,appointment_date,appointment_of,appointment_time,type) 
+                    values('$username','$name','$date','$ppl','$time','$type')";
+                    
                     mysqli_query($con,$query);
+
+                    
                     echo mysqli_error($con);
 
                 }
@@ -108,7 +112,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Hello, <span>Welcome here</span></h1>
+                                <h1>Hello, <span>Welcome <?= $_SESSION['name']?></span></h1>
                             </div>
                         </div>
                     </div>
@@ -139,7 +143,7 @@
                                             <div class="basic-form">
                                                 <form method="post" action="hospital.php">
 
-                                                    <label>Painten name:</label>
+                                                    <label>Patient name:</label>
                                                     <input type="text" class="form-control" name="pname">
 
                                                         <div class="form-group">
@@ -187,8 +191,8 @@
                                             </thead>
                                             <tbody>
                                             <?php
-
-                                                $query = "select * from appointment where appoint_for='hospital'";
+                                                $se_name = $_SESSION['name'];
+                                                $query = "select * from appointment where type='hospital' and username = '$se_name'";
                                                 $res = mysqli_query($con, $query);
                                                 echo mysqli_error($con);
 
@@ -196,10 +200,10 @@
                                                 if (mysqli_num_rows($res) > 0) {
                                                     while ($row = mysqli_fetch_array($res)) {
                                                         echo '<tr>
-                                                        <td>' . $row['username'] . '</td>
+                                                        <td>' . $row['patient_name'] . '</td>
                                                         <td>' . $row['appointment_of'] . '</td>
                                                         <td>' . $row['appointment_date'] . '</td>
-                                                        <td>' . $row['appiontment_time'] . '</td>
+                                                        <td>' . $row['appointment_time'] . '</td>
                                                 </tr>';
                                                     }
 
