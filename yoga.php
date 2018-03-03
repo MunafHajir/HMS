@@ -23,6 +23,14 @@ if($_POST){
     echo mysqli_error($con);
 
 }
+if ($_GET) {
+                $st = $_GET['st'];
+                //echo $name;
+                $query="DELETE FROM yoga WHERE time_from='".$st."';";
+                //echo $query;
+                mysqli_query($con,$query);
+                echo mysqli_error($con);
+}
 ?>
 
 <!DOCTYPE html>
@@ -263,7 +271,8 @@ if($_POST){
                                                     <th>Appointment Date</th>
                                                     <th>From</th>
                                                     <th>End</th>
-                                                    <th>Package 1</th>               
+                                                    <th>Package </th>
+                                                    <th>Action/Delete</th>               
                                                 </tr>
                                             </thead>
                                             <?php
@@ -281,6 +290,7 @@ if($_POST){
                                                         <td>' . $row['time_from'] . '</td>
                                                         <td>' . $row['time_end'] . '</td>
                                                         <td>' . $row['package'] . '</td>
+                                                        <td><a href="gym.php?st='.$row['time_from'].'">Delete</a></td>
                                                 </tr>';
                                                 }
 

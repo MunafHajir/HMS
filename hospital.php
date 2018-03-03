@@ -19,7 +19,15 @@
                     echo mysqli_error($con);
 
                 }
-
+                if($_GET){
+                $name = $_GET['name'];
+                //echo $name;
+                $query="DELETE FROM appointment WHERE patient_name='".$name."';";
+                //echo $query;
+                mysqli_query($con,$query);
+                echo mysqli_error($con);
+                }
+                
 
 ?>
 
@@ -190,6 +198,7 @@
                                                     <th>Appointment Of</th>
                                                     <th>Appointment Date</th>
                                                     <th>Appointment Time</th>
+                                                    <th>Action/Cancelation</th>
                                                  
                                                 </tr>
                                             </thead>
@@ -208,6 +217,7 @@
                                                         <td>' . $row['appointment_of'] . '</td>
                                                         <td>' . $row['appointment_date'] . '</td>
                                                         <td>' . $row['appointment_time'] . '</td>
+                                                        <td><a href="hospital.php?name='.$row['patient_name'].'">Delete</a></td>
                                                 </tr>';
                                                     }
 

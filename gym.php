@@ -13,12 +13,20 @@ if($_POST){
     $time_end=$_POST['appoint_time_end'];
     $query="insert into gym(username,appointment_date,trainer,time_from,time_end,package) 
                     values('$username','$date','$trainer','$time_from','$time_end','$package')";
+    //echo $query;
     mysqli_query($con,$query);
     echo mysqli_error($con);
-
+}
+if ($_GET) {
+                $st = $_GET['st'];
+                //echo $name;
+                $query="DELETE FROM gym WHERE time_from='".$st."';";
+                //echo $query;
+                mysqli_query($con,$query);
+                echo mysqli_error($con);
 }
 ?>
-<!DOCTYPE html>
+<html>
 <html lang="en">
 
 <head>
@@ -248,26 +256,28 @@ if($_POST){
                                                     <th>Start Time</th>
                                                     <th>End Time</th>
                                                     <th>Package</th>
+                                                    <th>Action/Delete</th>
 
                                                 </tr>
                                             </thead>
                                              <?php
 
-                                            $query = "select * from gym where username = '$username'";
-                                            $res = mysqli_query($con, $query);
-                                            echo mysqli_error($con);
+                        $query = "select * from gym where username='$username'";
+                        $res = mysqli_query($con, $query);
+                        echo mysqli_error($con);
 
 
-                                            if (mysqli_num_rows($res) > 0) {
-                                                while ($row = mysqli_fetch_array($res)) {
-                                                    echo '<tr>
-                                                        <td>' . $row['trainer'] . '</td>
-                                                        <td>' . $row['appointment_date'] . '</td>
-                                                        <td>' . $row['time_from'] . '</td>
-                                                        <td>' . $row['time_end'] . '</td>
-                                                         <td>' . $row['package'] . '</td>
+                        if (mysqli_num_rows($res) > 0) {
+                            while ($row = mysqli_fetch_array($res)) {
+                                    echo '<tr>
+                                                    <td>' . $row['trainer'] . '</td>
+                                                    <td>' . $row['appointment_date'] . '</td>
+                                                    <td>' . $row['time_from'] . '</td>
+                                                    <td>' . $row['time_end'] . '</td>
+                                                    <td>' . $row['package'] . '</td>
+                                                    <td><a href="gym.php?st='.$row['time_from'].'">Delete</a></td>
            
-                                                </tr>';
+                                            </tr>';
                                                 }
 
                                             }
